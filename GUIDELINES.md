@@ -2,18 +2,23 @@
 
 Repository-specific standards for the Convergence Trials game client.
 
+Current direction: desktop runtime in C++ with SFML 3.1.
+Current state: runtime source is intentionally absent pending migration implementation.
+
 ## Source of Truth
 
-- TypeScript source lives in `src/`.
-- Item, location, and region IDs defined here must stay in sync with the apworld in `archipelago/worlds/convergence_trials/` (in the `archipelago_minigame_suite` repo).
-- The logger in `src/shared/logger.ts` is the only logging interface — do not use `console.*` directly.
+- Runtime architecture direction is C++20 + SFML 3.1 + CMake.
+- Build configuration source of truth is `CMakeLists.txt` plus `CMakePresets.json`.
+- Item, location, and region IDs defined for the game client must stay in sync with the apworld in `archipelago/worlds/convergence_trials/` (in the `archipelago_minigame_suite` repo).
+- Any future runtime implementation must preserve Archipelago protocol compatibility.
 
 ## Code Standards
 
-- All source files are TypeScript; do not add plain `.js` files to `src/`.
-- Use private class fields (`#field`) over `private` keyword for true encapsulation.
-- Prefer explicit types over `any`. Avoid type assertions unless there is no alternative.
-- Keep modules focused: client, runtime, and shared code must not circularly depend on each other.
+- Do not reintroduce TypeScript/Node runtime source files.
+- Use modern C++20 language features where they improve clarity and safety.
+- Organize source by responsibility (client/network, runtime/gameplay, shared data) and avoid circular dependencies.
+- Keep SFML-specific rendering/input code separated from gameplay logic where practical.
+- Keep CMake presets cross-platform and avoid hardcoding machine-specific paths.
 
 ## ID Ranges (provisional)
 
@@ -31,7 +36,7 @@ Update this table and the apworld in sync whenever IDs change.
 
 - Explain intent, scope, and rationale in the PR description.
 - Keep changes focused — split unrelated work into separate PRs.
-- Run `npm run typecheck` before pushing.
+- Keep documentation and implementation status aligned.
 
 ## Collaboration
 

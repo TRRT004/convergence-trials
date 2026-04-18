@@ -1,0 +1,54 @@
+{
+  "version": 5,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 24,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "dev",
+      "displayName": "Development (migration scaffold)",
+      "description": "Configures the project without building a runtime executable.",
+      "binaryDir": "${sourceDir}/build/dev",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CONVERGENCE_TRIALS_ENABLE_RUNTIME": "OFF"
+      }
+    },
+    {
+      "name": "runtime-debug",
+      "displayName": "Runtime Debug",
+      "description": "Enables runtime target. Requires src/main.cpp and SFML 3.1.",
+      "binaryDir": "${sourceDir}/build/runtime-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CONVERGENCE_TRIALS_ENABLE_RUNTIME": "ON"
+      }
+    },
+    {
+      "name": "runtime-release",
+      "displayName": "Runtime Release",
+      "description": "Enables runtime target in release mode. Requires src/main.cpp and SFML 3.1.",
+      "binaryDir": "${sourceDir}/build/runtime-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CONVERGENCE_TRIALS_ENABLE_RUNTIME": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "dev",
+      "configurePreset": "dev"
+    },
+    {
+      "name": "runtime-debug",
+      "configurePreset": "runtime-debug"
+    },
+    {
+      "name": "runtime-release",
+      "configurePreset": "runtime-release"
+    }
+  ]
+}

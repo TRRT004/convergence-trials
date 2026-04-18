@@ -4,32 +4,31 @@ An actionable plan for the Convergence Trials game client.
 
 ## Vision
 
-A modular TypeScript minigame suite that integrates with the Archipelago Multiworld Randomizer — each minigame exposes locations and items used for multiworld progression.
+A modular desktop C++ game client built on SFML 3.1 that integrates with the Archipelago Multiworld Randomizer.
 
 ## Short-term (MVP)
 
+- [ ] Add CMake project scaffolding for the desktop runtime.
+- [ ] Define runtime module boundaries (network/client, gameplay runtime, shared IDs/data).
 - [ ] Implement one fully playable minigame with at least 3 locations.
 - [ ] Define and stabilise item/location/region ID ranges.
-- [ ] Add unit tests for `GameRuntime` unlock logic.
-- [ ] Add CI to run `typecheck` and tests on every PR.
+- [ ] Add initial CI for C++ formatting/lint/build checks.
 
 ### Completed
 
-- TypeScript Archipelago client shim (`ArchipelagoClient`).
-- `GameRuntime` with region unlock system and item tracking.
-- Sub-region hierarchy with `UnlockCondition` boolean logic.
-- Structured logger with level filtering, ANSI colours, and tag alignment.
-- Connection mockup (`src/mockup.ts`) for local development.
+- Removed the previous TypeScript runtime implementation to prepare for C++/SFML 3.1 migration.
+- Updated repository documentation to migration-first status.
+- Added initial CMake scaffold (`CMakeLists.txt`, `CMakePresets.json`) with runtime target gating.
 
 ## Mid-term
 
 - Save/load persistence for received items and cleared locations.
 - Reusable minigame base class and developer guide.
-- Basic web UI scaffolding for hosting minigames in the browser.
+- Add a desktop menu flow and session configuration UX.
 
 ## Long-term
 
-- Support multiple deployment targets (browser, Electron, etc.).
+- Support multiple desktop deployment targets (Linux, Windows, macOS).
 - Tooling to generate Archipelago-compatible slot configuration from game data.
 - Publish example seed runs and a demo release.
 

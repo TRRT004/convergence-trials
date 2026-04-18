@@ -4,10 +4,8 @@ All notable changes to the game client will be documented here.
 
 ## [Unreleased]
 
-- Initial extraction from `archipelago_minigame_suite` into its own repository.
-- TypeScript game client: `ArchipelagoClient`, `GameRuntime`, shared types.
-- Structured logger with level filtering, ANSI colours, and tag alignment.
-- Region unlock system with recursive `UnlockCondition` (item / all / any).
-- Sub-region hierarchy: regions can belong to a parent minigame.
-- Environment-based configuration via `.env` (`LOG_LEVEL`, `LOG_TAG_WIDTH`).
-- Connection mockup (`src/mockup.ts`) for local development against a live server.
+- 2026-04-18: Desktop migration reset
+  - Switched runtime direction to C++ with SFML 3.1
+  - Removed TypeScript runtime source and Node toolchain files
+  - Rewrote project documentation to migration-first status
+  - Added initial CMake scaffold and preset configuration

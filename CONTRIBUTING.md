@@ -2,6 +2,8 @@
 
 Thank you for helping improve Convergence Trials.
 
+This repository is currently in a migration phase: the TypeScript runtime has been removed, and the C++/SFML 3.1 runtime has not been implemented yet.
+
 ## Before You Start
 
 1. Check open issues to avoid duplicate work.
@@ -10,12 +12,27 @@ Thank you for helping improve Convergence Trials.
 
 ## Local Setup
 
-1. Clone the repository (or the parent `archipelago_minigame_suite` to also get the server).
-2. Install dependencies:
+1. Clone the repository (or the parent `archipelago_minigame_suite` to also get the server harness).
+2. Review migration direction in `README.md`, `GUIDELINES.md`, and `ROADMAP.md`.
+3. Use the parent repository script to boot a local Archipelago server for integration work:
 
 ```bash
-npm install
-cp .env.example .env
+cd ../archipelago_minigame_suite
+./scripts/run_mockup.sh
+```
+
+Windows PowerShell:
+
+```powershell
+cd ..\archipelago_minigame_suite
+powershell -ExecutionPolicy Bypass -File .\scripts\run_mockup.ps1
+```
+
+4. Validate CMake scaffold configuration:
+
+```bash
+cmake --preset dev
+cmake --build --preset dev
 ```
 
 ## Branch and Commit Conventions
@@ -29,17 +46,19 @@ cp .env.example .env
 
 Examples:
 
-- `feat: add sub-region unlock support`
-- `fix: handle disconnection before items are received`
-- `chore: update archipelago.js to 2.2.0`
+- `feat: scaffold cmake project structure`
+- `fix: document sfml dependency requirements`
+- `chore: align id mapping notes with apworld`
 
 ## Pull Request Checklist
 
 Before opening a PR, verify all items below:
 
 - [ ] The change has a clear purpose and scope.
-- [ ] TypeScript compiles without errors: `npm run typecheck`
 - [ ] Item/location/region IDs are kept in sync with the apworld in `archipelago/worlds/convergence_trials/`.
+- [ ] TypeScript/Node runtime artifacts were not reintroduced.
+- [ ] CMake scaffold still configures and builds via the `dev` preset.
+- [ ] Documentation is updated to match migration state and current implementation status.
 - [ ] The PR description explains what changed and why.
 
 ## Review Process
