@@ -7,8 +7,8 @@ The runtime direction is now C++ with SFML 3.1.
 ## Status
 
 - The previous TypeScript runtime has been removed.
-- No C++ runtime implementation is committed yet.
-- This repository currently contains migration docs and CMake scaffolding.
+- A minimal C++ scaffold (`src/main.cpp`) is committed to validate SFML/CMake toolchains.
+- Full runtime implementation is still pending.
 
 ## Planned Runtime Stack
 
@@ -33,11 +33,26 @@ cmake --preset dev
 cmake --build --preset dev
 ```
 
-To enable the runtime target later (once `src/main.cpp` exists and SFML 3.1 is installed), use:
+To build the runtime scaffold with SFML 3.1:
 
 ```bash
-cmake --preset runtime-debug
-cmake --build --preset runtime-debug
+SFML_ROOT=/path/to/SFML-3.1.0 \
+cmake -S . -B build/runtime-debug \
+	-DCMAKE_BUILD_TYPE=Debug \
+	-DCONVERGENCE_TRIALS_ENABLE_RUNTIME=ON \
+	-DCMAKE_PREFIX_PATH="$SFML_ROOT"
+cmake --build build/runtime-debug --parallel
+```
+
+Windows PowerShell + MinGW GCC:
+
+```powershell
+$env:SFML_ROOT = "C:\Libraries\SFML-3.1.0"
+cmake -S . -B build/runtime-debug-mingw -G "MinGW Makefiles" `
+	-DCMAKE_BUILD_TYPE=Debug `
+	-DCONVERGENCE_TRIALS_ENABLE_RUNTIME=ON `
+	-DCMAKE_PREFIX_PATH="$env:SFML_ROOT"
+cmake --build build/runtime-debug-mingw --parallel
 ```
 
 ## Current Local Harness

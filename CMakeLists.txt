@@ -21,6 +21,11 @@ if(CONVERGENCE_TRIALS_ENABLE_RUNTIME)
         message(FATAL_ERROR "CONVERGENCE_TRIALS_ENABLE_RUNTIME=ON requires src/main.cpp. Runtime implementation is not committed yet.")
     endif()
 
+    if(DEFINED ENV{SFML_ROOT} AND NOT "$ENV{SFML_ROOT}" STREQUAL "")
+        file(TO_CMAKE_PATH "$ENV{SFML_ROOT}" _convergence_trials_sfml_root)
+        list(PREPEND CMAKE_PREFIX_PATH "${_convergence_trials_sfml_root}")
+    endif()
+
     find_package(SFML 3.1 REQUIRED COMPONENTS System Window Graphics)
 
     add_executable(convergence_trials
