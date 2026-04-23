@@ -7,9 +7,21 @@
   },
   "configurePresets": [
     {
+      "name": "mingw-base",
+      "hidden": true,
+      "generator": "MinGW Makefiles",
+      "environment": {
+        "PATH": "C:/Compilers/mingw64/bin;$penv{PATH}"
+      },
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "C:/Compilers/mingw64/bin/g++.exe"
+      }
+    },
+    {
       "name": "dev",
       "displayName": "Development (migration scaffold)",
       "description": "Configures the project without building a runtime executable.",
+      "inherits": "mingw-base",
       "binaryDir": "${sourceDir}/build/dev",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
@@ -20,6 +32,7 @@
       "name": "runtime-debug",
       "displayName": "Runtime Debug",
       "description": "Enables runtime target. Requires src/main.cpp and SFML 3.1.",
+      "inherits": "mingw-base",
       "binaryDir": "${sourceDir}/build/runtime-debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
@@ -30,6 +43,7 @@
       "name": "runtime-release",
       "displayName": "Runtime Release",
       "description": "Enables runtime target in release mode. Requires src/main.cpp and SFML 3.1.",
+      "inherits": "mingw-base",
       "binaryDir": "${sourceDir}/build/runtime-release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",

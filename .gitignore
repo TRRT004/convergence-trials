@@ -19,3 +19,6 @@ CMakeUserPresets.json
 # Legacy TypeScript artifacts (kept ignored during migration)
 node_modules/
 dist/
+
+# IDE and editor files
+.vscode/

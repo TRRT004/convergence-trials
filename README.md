@@ -7,7 +7,7 @@ The runtime direction is now C++ with SFML 3.1.
 ## Status
 
 - The previous TypeScript runtime has been removed.
-- No C++ runtime implementation is committed yet.
+- A minimal C++ runtime smoke test is committed in `src/main.cpp`.
 - This repository currently contains migration docs and CMake scaffolding.
 
 ## Planned Runtime Stack
@@ -40,9 +40,31 @@ cmake --preset runtime-debug
 cmake --build --preset runtime-debug
 ```
 
+## One-command Build + Run (Windows)
+
+Use the PowerShell helper script to configure, build, and run by target:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run_game.ps1 -Target dev
+powershell -ExecutionPolicy Bypass -File .\scripts\run_game.ps1 -Target release -SFMLDir "C:\Libraries\SFML-3.1.0\bin"
+powershell -ExecutionPolicy Bypass -File .\scripts\run_game.ps1 -Target runtime-debug -SFMLDir "C:\Libraries\SFML-3.1.0\bin"
+```
+
+Targets:
+
+- `dev` configures/builds scaffold-only mode and does not launch an executable.
+- `release` maps to the `runtime-release` preset and launches the release runtime.
+- `runtime-debug` maps to the debug runtime preset and launches the debug runtime.
+
+Optional: add `-NoRun` to only configure/build.
+
+For runtime targets, `-SFMLDir` accepts the SFML root directory, `bin` directory, or `lib/cmake/SFML` directory.
+
+When using the Visual Studio generator/presets, use an MSVC-built SFML package. MinGW-built SFML binaries can link but fail at runtime.
+
 ## Current Local Harness
 
-There is no runnable in-repo client yet.
+A minimal in-repo SFML smoke-test runtime is runnable, but full Archipelago client gameplay/network integration is still pending.
 
 Use the infrastructure repository to start a local Archipelago server harness:
 

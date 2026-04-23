@@ -40,6 +40,15 @@ if(CONVERGENCE_TRIALS_ENABLE_RUNTIME)
             SFML::Window
             SFML::Graphics
     )
+
+    if(WIN32)
+        add_custom_command(TARGET convergence_trials POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                $<TARGET_RUNTIME_DLLS:convergence_trials>
+                $<TARGET_FILE_DIR:convergence_trials>
+            COMMAND_EXPAND_LISTS
+        )
+    endif()
 else()
     add_custom_target(convergence_trials_migration_status ALL
         COMMAND ${CMAKE_COMMAND} -E echo "Runtime implementation pending. Configure with -DCONVERGENCE_TRIALS_ENABLE_RUNTIME=ON once src/main.cpp exists."
